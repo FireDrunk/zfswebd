@@ -2,8 +2,8 @@
 {% block title %}Index{% endblock %}
 {% block pageheader %}
 			<ul class="nav nav-pills">
-			  <li class="active"><a href="/disks/overview">Overview</a></li>
-			  <li><a href="/disks/health">Health</a></li>
+			  <li><a href="/disks/overview">Overview</a></li>
+			  <li class="active"><a href="/disks/health">Health</a></li>
 			</ul>
 {% endblock %}
 
@@ -31,7 +31,7 @@
     {% for entry in content %}
 	<tr>
 		<td><span class="glyphicon glyphicon-hdd"></span></td>
-		<td><a href="/disk/health/{{ entry['identifier'] }}">{{ entry['identifier'] }}</a></td>
+		<td><a href="/disks/health/{{ entry['identifier'] }}">{{ entry['identifier'] }}</a></td>
 		<td>{{ entry['status'] }}</td>
 		<td>{{ entry['temp'] }}</td>
 		<td>{{ entry['powercycles'] }}</td>

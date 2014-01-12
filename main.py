@@ -13,4 +13,7 @@ root.status = Status()
 from pages.disks import Disks
 root.disks = Disks()
 
+from pages.network import Network
+root.network= Network()
+
 cherrypy.quickstart(root,'/','app.config')

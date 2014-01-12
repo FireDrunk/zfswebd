@@ -1,0 +1,39 @@
+{% extends "master.html" %}
+{% block title %}Index{% endblock %}
+{% block pageheader %}
+			<ul class="nav nav-pills">
+			  <li><a href="/disks/overview">Overview</a></li>
+			  <li class="active"><a href="/disks/health">Health</a></li>
+			</ul>
+{% endblock %}
+
+{% block content %}
+<div class="panel panel-default">
+	<div class="panel-heading"><strong>Disk Health: {{ content['identifier'] }}</strong></div>
+		<div class="panel-body">
+		{% if content['status'] is defined %}
+			Disk health as reported by S.M.A.R.T:
+		{% else %}
+			<span> This disk does not support S.M.A.R.T. </span>
+		{% endif %}
+		</div>
+
+		{% if content['status'] is defined %}
+		<table class="table table-striped table-condensed">
+			<tr>
+				<th>Status</th>			<td>{{ content['status'] }}</td>
+				<th>Temperature</th>	<td>{{ content['temp'] }}</td>
+				<th>Power Cycles</th>	<td>{{ content['powercycles'] }}</td>
+				<th>Cable Errors</th>	<td>{{ content['cableerrors'] }}</td>
+				<th>Load Cycles</th>	<td>{{ content['loadcycles'] }}</td>
+				<th>Bad Sectors</th>	<td>{{ content['badsectors'] }}</td>
+				<th>Lifetime</th>		<td>{{ content['lifetime'] }}</td>
+			</tr>
+		</table>
+		{% endif %}
+		</div>
+
+
+</div>
+
+{% endblock %}
