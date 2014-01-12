@@ -1,0 +1,18 @@
+{% extends "master.html" %}
+{% block title %}Index{% endblock %}
+{% block pageheader %}
+			<ul class="nav nav-pills">
+			  <li><a href="/status/status">Status</a></li>
+			  <li class="active"><a href="/status/cpu">Processor Usage</a></li>
+			  <li><a href="/status/memory">Memory Usage</a></li>
+			  <li><a href="/status/logs">Logs</a></li>
+			  <li><a href="/status/release">Release Information</a></li>
+			</ul>
+{% endblock %}
+
+{% block content %}
+Machine Type: {{ machinetype }} <br>
+Model: {{ model }} <br>
+CPU Count: {{ cpucount }} <br>
+Architecture: {{ architecture }} <br>
+{% endblock %}
