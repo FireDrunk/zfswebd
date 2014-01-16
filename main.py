@@ -5,9 +5,13 @@ sys.path.insert(0, ROOT)
 
 import cherrypy
 
-class Root:pass
+
+
+
+from pages.home import Home
+root = Home()
+
 from pages.status import Status
-root = Root()
 root.status = Status()
 
 from pages.disks import Disks
@@ -15,5 +19,8 @@ root.disks = Disks()
 
 from pages.network import Network
 root.network= Network()
+
+from pages.zfs import ZFS
+root.zfs = ZFS()
 
 cherrypy.quickstart(root,'/','app.config')

@@ -1,0 +1,14 @@
+table {
+	table-layout: fixed;
+	word-wrap: break-word;
+}
+
+body {
+	font-size: 1.2em;
+}
+
+p.header {
+	font-weight: bold;
+	padding-left: 4px;
+	padding-right: 4px;
+}
