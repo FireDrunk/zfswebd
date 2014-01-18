@@ -3,6 +3,8 @@
 {% block pageheader %}
 			<ul class="nav nav-pills">
 			  <li class="active"><a href="/disks/overview">Overview</a></li>
+			  <li><a href="/disks/partitions">Partitions</a></li>
+			  <li><a href="/disks/gpt">GPT</a></li>
 			  <li><a href="/disks/health">Health</a></li>
 			</ul>
 {% endblock %}
@@ -15,7 +17,7 @@
   	Remember: Sectorsize is often reported wrong by the disk for compatibility reasons.<br>
   	Click on a disk identifier for more Actions.
   </div>
-  <table class="table table-striped table-condensed">
+  <table class="table table-striped table-condensed table-hover">
   <thead>
   	<tr>
   		<th>&nbsp;</th>
@@ -30,7 +32,7 @@
     {% for entry in content %}
 		<tr>
 			<td><span class="glyphicon glyphicon-hdd"></span></td>
-			<td><a href="/disks/overview/{{ entry['identifier'] }}">{{ entry['identifier'] }}</a></td>
+			<td><a class="btn btn-sm btn-primary" href="/disks/overview/{{ entry['identifier'] }}">{{ entry['identifier'] }}</a></td>
 			<td>{{ entry['name'] }}</td>
 			<td>{{ entry['mediasize'] }}</td>
 			<td>{{ entry['sectorsize'] }}</td>

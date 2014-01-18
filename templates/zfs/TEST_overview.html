@@ -1,0 +1,180 @@
+{% extends "master.html" %}
+{% block title %}Index{% endblock %}
+{% block pageheader %}
+			<ul class="nav nav-pills">
+			  <li class="dropdown">
+			  	 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			  	 	Filesystems
+			  	 	<span class="caret"></span>
+			  	 </a>
+			  	 <ul class="dropdown-menu">
+			  	 	<li><a href="/zfs/filesystems/overview">Overview</a></li>
+			  	 	<li><a href="/zfs/filesystems/create">Create</a></li>
+			  	 	<li><a href="/zfs/filesystems/destroy">Destroy</a></li>
+			  	 </ul>
+			  </li>
+			  <li class="dropdown">
+			  	 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			  	 	Pools
+			  	 	<span class="caret"></span>
+			  	 </a>
+			  	 <ul class="dropdown-menu">
+			  	 	<li><a href="/zfs/pools/overview">Overview</a></li>
+			  	 	<li><a href="/zfs/pools/create">Create</a></li>
+			  	 	<li><a href="/zfs/pools/destroy">Destroy</a></li>
+			  	 </ul>
+			  </li>
+			  <li class="dropdown">
+			  	 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			  	 	Snapshots
+			  	 	<span class="caret"></span>
+			  	 </a>
+			  	 <ul class="dropdown-menu">
+			  	 	<li><a href="/zfs/snapshots/overview">Overview</a></li>
+			  	 	<li><a href="/zfs/snapshots/create">Create</a></li>
+			  	 	<li><a href="/zfs/snapshots/destroy">Destroy</a></li>
+			  	 </ul>
+			  </li>
+			</ul>
+{% endblock %}
+
+{{ fs }}
+<br>
+{{ pl }}
+{% block content %}
+
+
+<div class="row container pagination-centered">
+
+{% for pool in pl %}
+	{% set healthcode = '1' %}
+	<div class="col-md-6">
+		<div class="panel panel-default panel-success">
+			<div class="panel-heading">
+				<div class="row-fluid">
+					<div class="col-md-2">
+						<button type="button" class="btn btn-success">{{ pool['name'] }}</button>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<tr><th>Allocated:</th><td class="text-right">{{ pool['allocated'] }}</td></tr>
+					<tr><th>Size:</th><td class="text-right">{{ pool['size'] }}</td></tr>
+					<tr><th>Free:</th><td class="text-right">{{ pool['free'] }}</td></tr>
+					<tr><th>Health:</th><td class="text-right">{{ pool['health'] }}</td></tr>
+					<tr><th>Altroot:</th><td class="text-right">{{ pool['altroot'] }}</td></tr>
+				</table>
+				<div class="progress progress-striped active">
+				  <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%">
+				    <span class="sr-only">{{ pool['capacity']}} Full</span>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+
+<div class="row container">
+{% for filesystem in fs %}
+	<div class="col-md-3">
+		<div class="panel panel-default panel-success">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-md-9">
+						<p class="header">{{ filesystem['name'] }}</p>
+					</div>
+					<div class="col-md-3">
+						<button type="button" class="btn btn-success">
+							<span class="glyphicon glyphicon-folder-close"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<tr><th>Used:</th><td class="text-right">{{ filesystem['used'] }}</td></tr>
+					<tr><th>Referenced:</th><td class="text-right">{{ filesystem['referenced'] }}</td></tr>
+					<tr><th>Available:</th><td class="text-right">{{ filesystem['available'] }}</td></tr>
+					<tr><th>Healthcode:</th><td class="text-right">{{ filesystem['healthcode'] }}</td></tr>
+				</table>
+				<div class="progress progress-striped active">
+				  <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%">
+				    <span class="sr-only">5% Full</span>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endfor %}
+</div>
+
+<div class="row container">
+{% for filesystem in fs %}
+	<div class="col-md-3">
+		<div class="panel panel-default panel-warning">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-md-9">
+						<p class="header">{{ filesystem['name'] }}</p>
+					</div>
+					<div class="col-md-3">
+						<button type="button" class="btn btn-warning">
+							<span class="glyphicon glyphicon-folder-close"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<tr><th>Used:</th><td class="text-right">{{ filesystem['used'] }}</td></tr>
+					<tr><th>Referenced:</th><td class="text-right">{{ filesystem['referenced'] }}</td></tr>
+					<tr><th>Available:</th><td class="text-right">{{ filesystem['available'] }}</td></tr>
+					<tr><th>Healthcode:</th><td class="text-right">{{ filesystem['healthcode'] }}</td></tr>
+				</table>
+				<div class="progress progress-striped active">
+				  <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%">
+				    <span class="sr-only">5% Full</span>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endfor %}
+</div>
+
+<div class="row container">
+{% for filesystem in fs %}
+	<div class="col-md-3">
+		<div class="panel panel-default panel-danger">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-md-9">
+						<p class="header">{{ filesystem['name'] }}</p>
+					</div>
+					<div class="col-md-3">
+						<button type="button" class="btn btn-danger">
+							<span class="glyphicon glyphicon-folder-close"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<tr><th>Used:</th><td class="text-right">{{ filesystem['used'] }}</td></tr>
+					<tr><th>Referenced:</th><td class="text-right">{{ filesystem['referenced'] }}</td></tr>
+					<tr><th>Available:</th><td class="text-right">{{ filesystem['available'] }}</td></tr>
+					<tr><th>Healthcode:</th><td class="text-right">{{ filesystem['healthcode'] }}</td></tr>
+				</table>
+				<div class="progress progress-striped active">
+				  <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%">
+				    <span class="sr-only">5% Full</span>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endfor %}
+</div>
+{% endblock %}

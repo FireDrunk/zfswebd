@@ -11,9 +11,6 @@ import cherrypy
 from pages.home import Home
 root = Home()
 
-from pages.status import Status
-root.status = Status()
-
 from pages.disks import Disks
 root.disks = Disks()
 

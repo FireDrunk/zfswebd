@@ -26,3 +26,12 @@ class Disks(Page):
             return self.env.get_template('disks/health.html').render(self.content)
     health.exposed = True
 
+    def gpt(self, identifier = None):
+        gptlabels = self.rpcclient.call('gpt', 'list_gpt_labels')
+        return self.env.get_template('disks/gpt.html').render(content = gptlabels)
+    gpt.exposed = True
+
+    def partitions(self):
+        partitions = self.rpcclient.call('disk', 'get_all_disk_partitions')
+        return self.env.get_template('disks/partitions.html').render(content = partitions)
+    partitions.exposed = True

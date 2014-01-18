@@ -1,0 +1,54 @@
+{% extends "master.html" %}
+{% block title %}Index{% endblock %}
+{% block pageheader %}
+			<ul class="nav nav-pills">
+			  <li><a href="/disks/overview">Overview</a></li>
+			  <li class="active"><a href="/disks/partitions">Partitions</a></li>
+			  <li><a href="/disks/gpt">GPT</a></li>
+			  <li><a href="/disks/health">Health</a></li>
+			</ul>
+{% endblock %}
+
+{% block content %}
+{% for entry in content %}
+<div class="panel panel-default">
+  <div class="panel-heading">Partitions for disk: <strong>{{ entry['name'] }}</strong> identified as: <strong>{{ entry['identifier'] }}</strong></div>
+	  <div class="panel-body">
+	  {% if entry['partitions']|length > 0 %}
+	  	<div class="partition-wrapper">
+	  		<div class="max">{{ entry['sectorcount'] }}</div>
+		  {% for partition in entry['partitions'] %}
+		  	<div class="partition">
+			  	{{ partition['name'] }}
+			  	({{ partition['size'] }})
+		  	</div>
+		  {% endfor %}
+	  	</div>
+	  {% endif %}
+	  </div>
+  <table class="table table-striped table-condensed">
+  <thead>
+  	<th>Start</th>
+  	<th>Stop</th>
+  	<th>Name</th>
+  	<th>Type</th>
+  	<th>Size</th>
+  </thead>
+  <tbody>
+  {% if entry['partitions']|length == 0 %}
+  	<tr><td colspan=5>No partitions were detected.</td></tr>
+  {% else %}
+	  {% for partition in entry['partitions'] %}
+	  	<tr>
+	  		<td>{{ partition['start'] }}</td>
+	  		<td>{{ partition['stop'] }}</td>
+	  		<td>{{ partition['name'] }}</td>
+	  		<td>{{ partition['type'] }}</td>
+	  		<td>{{ partition['size'] }}</td>
+	  {% endfor %}
+  {% endif %}
+  </tbody>
+  </table>
+</div>
+{% endfor %}
+{% endblock %}

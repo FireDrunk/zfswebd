@@ -1,0 +1,56 @@
+{% extends "master.html" %}
+{% block title %}ZFS - Create Pool{% endblock %}
+{% block pageheader %}
+			<ul class="nav nav-pills">
+			  <li class="active"><a href="/zfs/overview">Overview</a></li>
+			  <li><a href="#">Pools</a></li>
+			  <li><a href="#">Filesystems</a></li>
+			  <li><a href="#">Snapshots</a></li>
+			</ul>
+{% endblock %}
+
+
+{% block content %}
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+  	<strong>{{ name }}</strong>
+  </div>
+  <table class="table table-striped table-condensed">
+  <th>Name</th><th>Value</th><th>Source</th>
+	{% for property in content %}
+		<tr>
+			<td>{{ property['name'] }}</td>
+			<td>{{ property['value'] }}</td>
+			<td>{{ property['source'] }}</td>
+		</tr>
+	{% endfor %}
+  </table>
+</div>
+{% endblock %}
+
+<tr>
+  		<th>Capacity</th><td>{{ content['capacity'] }}</td>
+  	</tr>
+  	<tr>
+  		<th>Size</th><td>{{ content['size'] }}</td>
+  	</tr>
+  	<tr>
+  		<th>Free</th>
+  		<td>{{ content['free'] }}</td>
+  	</tr>
+  	<tr>
+  		<th>Health</th>
+  		<td>{{ content['health'] }}</td>
+  	</tr>
+  	<tr>
+  		<th>Allocated</th>
+  		<td>{{ content['allocated'] }}</td>
+  	</tr>
+  	<tr>
+  		<th>Deduplication Ratio</th>
+  		<td>{{ content['dedup'] }}</td>
+  	</tr>
+  	<tr>
+  		<th>Altroot</th>
+  		<td>{{ content['altroot'] }}</td>
+  	</tr>

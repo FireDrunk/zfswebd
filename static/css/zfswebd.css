@@ -12,3 +12,38 @@ p.header {
 	padding-left: 4px;
 	padding-right: 4px;
 }
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #c4e3f3;
+}
+
+
+.nav-pills li a:active{
+	background-color: #2d6ca2;
+	color: white;
+}
+.nav-pills li a:hover{
+	background-color: #2d6ca2;
+	color: white;
+}
+
+.table td {
+    vertical-align: middle !important;
+}
+
+.partition-wrapper
+{
+	position: relative;
+}
+
+.partition-wrapper div.max
+{
+	border: solid 1px black;
+	width: 100%;
+}
+.partition-wrapper div.partition
+{
+	border: solid 1px black;
+	float: left;
+	display: inline;
+}

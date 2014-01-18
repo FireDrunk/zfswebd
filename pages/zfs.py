@@ -1,6 +1,10 @@
 from page import Page
+from pages.pool import Pool
+
 class ZFS(Page):
-    def default(self, indentifier = None):
+    pool = Pool()
+
+    def default(self):
         return self.overview()
     default.exposed = True
 
@@ -9,4 +13,7 @@ class ZFS(Page):
         poollist = self.rpcclient.call('zfs', 'list_pools')
         return self.env.get_template('zfs/overview.html').render(fs = fslist, pl = poollist)
     overview.exposed = True
+
+
+    pool.exposed = True
 
